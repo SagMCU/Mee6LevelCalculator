@@ -5,29 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XP Calculator</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        label { display: block; margin-top: 10px; }
-        input { margin-bottom: 10px; }
-        button { margin-top: 10px; padding: 10px; background-color: #6a0cad; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #890be3; }
-        .result { margin-top: 20px; font-weight: bold; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #0d1117;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #1e2228;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 350px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #6a0cad;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #890be3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            input, button {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Calculadora XP :D</h1>
+    <div class="container">
+        <h1>Calculadora XP :D</h1>
 
-    <label for="current-level">Nivel Actual:</label>
-    <input type="number" id="current-level" min="0" max="100" value="0">
+        <label for="current-level">Nivel Actual:</label>
+        <input type="number" id="current-level" min="0" max="100" value="0">
 
-    <label for="current-xp">XP Actual:</label>
-    <input type="number" id="current-xp" value="0">
+        <label for="current-xp">XP Actual:</label>
+        <input type="number" id="current-xp" value="0">
 
-    <label for="target-level">Nivel Deseado:</label>
-    <input type="number" id="target-level" min="0" max="100" value="0">
+        <label for="target-level">Nivel Deseado:</label>
+        <input type="number" id="target-level" min="0" max="100" value="0">
 
-    <button onclick="calculateXP()">Calcular XP</button>
+        <button onclick="calculateXP()">Calcular XP</button>
 
-    <div class="result" id="result"></div>
+        <div class="result" id="result"></div>
+    </div>
 
     <script>
         // XP Table
@@ -61,10 +122,15 @@
             const xpNeededForCurrent = xpTable[currentLevel];
             const xpToNextLevel = xpNeededForTarget - (xpNeededForCurrent + currentXP);
 
+            const resultElement = document.getElementById('result');
+            let xpText = '';
+
             if (xpToNextLevel >= 0) {
-                document.getElementById('result').textContent = `You need ${xpToNextLevel} more XP to reach level ${targetLevel}.`;
+                xpText = `<span style="color: #2df705;">${xpToNextLevel}</span>`;
+                resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para el nivel ${targetLevel}.`;
             } else {
-                document.getElementById('result').textContent = `You need to lose ${Math.abs(xpToNextLevel)} XP to reach level ${targetLevel}.`;
+                xpText = `<span style="color: #fa0223;">${Math.abs(xpToNextLevel)}</span>`;
+                resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para el nivel ${targetLevel}.`;
             }
         }
     </script>
