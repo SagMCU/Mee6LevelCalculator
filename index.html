@@ -109,30 +109,56 @@
 
         // Calculate XP needed to reach target level
         function calculateXP() {
-            const currentLevel = parseInt(document.getElementById('current-level').value);
-            const currentXP = parseInt(document.getElementById('current-xp').value);
-            const targetLevel = parseInt(document.getElementById('target-level').value);
+    const currentLevel = parseInt(document.getElementById('current-level').value);
+    const currentXP = parseInt(document.getElementById('current-xp').value);
+    const targetLevel = parseInt(document.getElementById('target-level').value);
 
-            if (currentLevel < 0 || currentLevel > 100 || targetLevel < 0 || targetLevel > 100) {
-                document.getElementById('result').textContent = "Selección de niveles incorrecta, solo se puede calcular entre 0 y 100 niveles.";
-                return;
-            }
+    // Validation of level inputs
+    if (currentLevel < 0 || currentLevel > 100 || targetLevel < 0 || targetLevel > 100) {
+        document.getElementById('result').textContent = "Selección de niveles incorrecta, solo se puede calcular entre 0 y 100 niveles.";
+        return;
+    }
 
-            const xpNeededForTarget = xpTable[targetLevel];
-            const xpNeededForCurrent = xpTable[currentLevel];
-            const xpToNextLevel = xpNeededForTarget - (xpNeededForCurrent + currentXP);
+    // XP for the current and target levels
+    const xpForCurrentLevel = xpTable[currentLevel];
+    const xpForNextLevel = xpTable[currentLevel + 1];
+    const xpForTargetLevel = xpTable[targetLevel];
+    const xpForTargetNextLevel = xpTable[targetLevel + 1];
 
-            const resultElement = document.getElementById('result');
-            let xpText = '';
+    // Calculate the XP needed to fully complete the current level
+    const xpForLevelCompletion = xpForNextLevel - xpForCurrentLevel;
 
-            if (xpToNextLevel >= 0) {
-                xpText = `<span style="color: #2df705;">${xpToNextLevel}</span>`;
-                resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para el nivel ${targetLevel}.`;
-            } else {
-                xpText = `<span style="color: #fa0223;">${Math.abs(xpToNextLevel)}</span>`;
-                resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para el nivel ${targetLevel}.`;
-            }
-        }
+    // Calculate the percentage of the current level completed
+    const currentLevelPercentage = currentXP / xpForLevelCompletion;
+
+    // Total XP the user currently has
+    const exactCurrentXP = xpForCurrentLevel + currentXP;
+
+    // 1. Calculate the XP to reach the target level at 0% completion
+    let xpToTargetAtZero = xpForTargetLevel - exactCurrentXP;
+
+    // 2. Calculate the additional XP needed to reach the desired completion percentage
+    const xpForTargetCompletion = xpForTargetNextLevel - xpForTargetLevel;
+    const additionalXpForCompletion = xpForTargetCompletion * currentLevelPercentage;
+
+    // Total XP difference
+    const totalXpDifference = xpToTargetAtZero + additionalXpForCompletion;
+
+    // Round the total XP difference for output
+    const roundedTotalXpDifference = Math.round(totalXpDifference);
+
+    // Output the result
+    const resultElement = document.getElementById('result');
+    let xpText = '';
+
+    if (roundedTotalXpDifference >= 0) {
+        xpText = `<span style="color: #2df705;">${roundedTotalXpDifference}</span>`;
+        resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${Math.round(currentLevelPercentage * 100)}% completado.`;
+    } else {
+        xpText = `<span style="color: #fa0223;">${Math.abs(roundedTotalXpDifference)}</span>`;
+        resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${Math.round(currentLevelPercentage * 100)}% completado.`;
+    }
+}
     </script>
 </body>
 </html>
