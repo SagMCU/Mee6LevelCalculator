@@ -151,12 +151,15 @@
     const resultElement = document.getElementById('result');
     let xpText = '';
 
+    // Create a yellow colored span for the percentage display
+    const percentageText = `<span style="color: #FFFF00;">${Math.round(currentLevelPercentage * 100)}%</span>`;
+
     if (roundedTotalXpDifference >= 0) {
         xpText = `<span style="color: #2df705;">${roundedTotalXpDifference}</span>`;
-        resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${Math.round(currentLevelPercentage * 100)}% completado.`;
+        resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
     } else {
         xpText = `<span style="color: #fa0223;">${Math.abs(roundedTotalXpDifference)}</span>`;
-        resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${Math.round(currentLevelPercentage * 100)}% completado.`;
+        resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
     }
 }
     </script>
