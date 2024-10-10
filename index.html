@@ -81,6 +81,46 @@
                 font-size: 16px;
             }
         }
+
+        .footer-square {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #1e2228;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 150px;
+            line-height: 1.2;
+            z-index: 1000; /* Ensure it stays on top */
+        }
+
+        .footer-square b {
+            font-weight: bold;
+            color: #cf43fa; /* Set bold words to the specified color */
+        }
+
+        .footer-square i {
+            font-style: italic;
+        }
+
+        .footer-square hr {
+            border: none;
+            border-top: 1px solid #888; /* Light gray line */
+            margin: 8px 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            .footer-square {
+                font-size: 10px;
+                padding: 8px;
+                max-width: 120px;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -99,6 +139,12 @@
         <button onclick="calculateXP()">Calcular XP</button>
 
         <div class="result" id="result"></div>
+    </div>
+
+    <div class="footer-square">
+        Made by <b>SagMCU</b> with help from <b>ChatGPT</b>.
+        <hr>
+        <i>Not affiliated with <b>Mee6 Developers</b>.</i>
     </div>
 
     <script>
