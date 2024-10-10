@@ -113,11 +113,21 @@
             margin: 8px 0;
         }
 
+        /* Responsive adjustments for mobile */
         @media screen and (max-width: 600px) {
             .footer-square {
-                font-size: 10px;
+                position: relative; /* Change position to relative */
+                bottom: auto; /* Reset bottom */
+                left: auto; /* Reset left */
+                margin-top: 20px; /* Add space between main content and footer */
+                max-width: 100%; /* Allow it to take up full width */
+                text-align: center; /* Center text on mobile */
+                font-size: 10px; /* Adjust font size */
                 padding: 8px;
-                max-width: 120px;
+            }
+
+            .container {
+                margin-bottom: 50px; /* Ensure space between the container and footer on mobile */
             }
         }
         
