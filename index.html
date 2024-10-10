@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G5JT8RHL4P"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G5JT8RHL4P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-G5JT8RHL4P');
-</script>
-    
+        gtag('config', 'G-G5JT8RHL4P');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XP Calculator</title>
-    <link rel="icon" type="image/x-icon" href="https://github.com/SagMCU/Mee6LevelCalculator/blob/main/TabIcon-2.png?raw=true">
+    <link rel="icon" type="image/x-icon"
+        href="https://github.com/SagMCU/Mee6LevelCalculator/blob/main/TabIcon-2.png?raw=true">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,9 +24,11 @@
             background-color: #0d1117;
             color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative;
         }
 
         .container {
@@ -35,6 +39,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
             max-width: 350px;
             width: 100%;
+            margin-bottom: 80px;
         }
 
         label {
@@ -77,15 +82,14 @@
             body {
                 margin: 10px;
             }
-            input, button {
+
+            input,
+            button {
                 font-size: 16px;
             }
         }
 
         .footer-square {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
             background-color: #1e2228;
             color: white;
             padding: 10px;
@@ -93,14 +97,23 @@
             font-size: 12px;
             text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            /* Allow it to take up full width */
             max-width: 150px;
-            line-height: 1.2;
-            z-index: 1000; /* Ensure it stays on top */
+            /* Limit width on larger screens */
+            position: absolute;
+            /* Position absolutely for desktop */
+            left: 10px;
+            /* Align to left on desktop */
+            bottom: 10px;
+            /* Align to bottom */
+            z-index: 1000;
         }
 
         .footer-square b {
             font-weight: bold;
-            color: #cf43fa; /* Set bold words to the specified color */
+            color: #cf43fa;
+            /* Set bold words to the specified color */
         }
 
         .footer-square i {
@@ -109,30 +122,38 @@
 
         .footer-square hr {
             border: none;
-            border-top: 1px solid #888; /* Light gray line */
+            border-top: 1px solid #888;
             margin: 8px 0;
         }
 
-        /* Responsive adjustments for mobile */
+        /* Mobile-specific styles */
         @media screen and (max-width: 600px) {
             .footer-square {
-                position: relative; /* Change position to relative */
-                bottom: auto; /* Reset bottom */
-                left: auto; /* Reset left */
-                margin-top: 20px; /* Add space between main content and footer */
-                max-width: 100%; /* Allow it to take up full width */
-                text-align: center; /* Center text on mobile */
-                font-size: 10px; /* Adjust font size */
-                padding: 8px;
+                position: relative;
+                /* Change to relative on mobile */
+                left: 0;
+                /* Reset left position */
+                bottom: 0;
+                /* Reset bottom position */
+                margin-top: 20px;
+                /* Add margin to top */
+                text-align: center;
+                /* Center the text */
+            }
+
+            body {
+                padding: 20px 10px;
+                /* Add padding for mobile */
             }
 
             .container {
-                margin-bottom: 50px; /* Ensure space between the container and footer on mobile */
+                margin-bottom: 20px;
+                /* Ensure space between container and footer on mobile */
             }
         }
-        
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Calculadora XP :D</h1>
@@ -160,12 +181,12 @@
     <script>
         // XP Table
         const xpTable = {
-            0: 0, 1: 100, 2: 255, 3: 475, 4: 770, 5: 1150, 6: 1625, 7: 2205, 8: 2900, 9: 3720, 10: 4675, 
-            11: 5775, 12: 7030, 13: 8450, 14: 10045, 15: 11825, 16: 13800, 17: 15980, 18: 18375, 19: 20995, 
-            20: 23850, 21: 26950, 22: 30305, 23: 33925, 24: 37820, 25: 42000, 26: 46475, 27: 51255, 28: 56350, 
-            29: 61770, 30: 67525, 31: 73625, 32: 80880, 33: 86900, 34: 94095, 35: 101675, 36: 109650, 37: 118030, 
-            38: 126825, 39: 136045, 40: 145700, 41: 155800, 42: 166355, 43: 177375, 44: 188870, 45: 200850, 
-            46: 213325, 47: 226305, 48: 239800, 49: 253820, 50: 268375, 51: 283475, 52: 299130, 53: 315350, 
+            0: 0, 1: 100, 2: 255, 3: 475, 4: 770, 5: 1150, 6: 1625, 7: 2205, 8: 2900, 9: 3720, 10: 4675,
+            11: 5775, 12: 7030, 13: 8450, 14: 10045, 15: 11825, 16: 13800, 17: 15980, 18: 18375, 19: 20995,
+            20: 23850, 21: 26950, 22: 30305, 23: 33925, 24: 37820, 25: 42000, 26: 46475, 27: 51255, 28: 56350,
+            29: 61770, 30: 67525, 31: 73625, 32: 80880, 33: 86900, 34: 94095, 35: 101675, 36: 109650, 37: 118030,
+            38: 126825, 39: 136045, 40: 145700, 41: 155800, 42: 166355, 43: 177375, 44: 188870, 45: 200850,
+            46: 213325, 47: 226305, 48: 239800, 49: 253820, 50: 268375, 51: 283475, 52: 299130, 53: 315350,
             54: 332145, 55: 349525, 56: 367500, 57: 386080, 58: 405275, 59: 425095, 60: 445550, 61: 466650,
             62: 488405, 63: 510825, 64: 533920, 65: 557700, 66: 582175, 67: 607355, 68: 633250, 69: 659870,
             70: 687225, 71: 715325, 72: 744180, 73: 773800, 74: 804195, 75: 835375, 76: 867350, 77: 900130,
@@ -176,59 +197,60 @@
 
         // Calculate XP needed to reach target level
         function calculateXP() {
-    const currentLevel = parseInt(document.getElementById('current-level').value);
-    const currentXP = parseInt(document.getElementById('current-xp').value);
-    const targetLevel = parseInt(document.getElementById('target-level').value);
+            const currentLevel = parseInt(document.getElementById('current-level').value);
+            const currentXP = parseInt(document.getElementById('current-xp').value);
+            const targetLevel = parseInt(document.getElementById('target-level').value);
 
-    // Validation of level inputs
-    if (currentLevel < 0 || currentLevel > 100 || targetLevel < 0 || targetLevel > 100) {
-        document.getElementById('result').textContent = "Selección de niveles incorrecta, solo se puede calcular entre 0 y 100 niveles.";
-        return;
-    }
+            // Validation of level inputs
+            if (currentLevel < 0 || currentLevel > 100 || targetLevel < 0 || targetLevel > 100) {
+                document.getElementById('result').textContent = "Selección de niveles incorrecta, solo se puede calcular entre 0 y 100 niveles.";
+                return;
+            }
 
-    // XP for the current and target levels
-    const xpForCurrentLevel = xpTable[currentLevel];
-    const xpForNextLevel = xpTable[currentLevel + 1];
-    const xpForTargetLevel = xpTable[targetLevel];
-    const xpForTargetNextLevel = xpTable[targetLevel + 1];
+            // XP for the current and target levels
+            const xpForCurrentLevel = xpTable[currentLevel];
+            const xpForNextLevel = xpTable[currentLevel + 1];
+            const xpForTargetLevel = xpTable[targetLevel];
+            const xpForTargetNextLevel = xpTable[targetLevel + 1];
 
-    // Calculate the XP needed to fully complete the current level
-    const xpForLevelCompletion = xpForNextLevel - xpForCurrentLevel;
+            // Calculate the XP needed to fully complete the current level
+            const xpForLevelCompletion = xpForNextLevel - xpForCurrentLevel;
 
-    // Calculate the percentage of the current level completed
-    const currentLevelPercentage = currentXP / xpForLevelCompletion;
+            // Calculate the percentage of the current level completed
+            const currentLevelPercentage = currentXP / xpForLevelCompletion;
 
-    // Total XP the user currently has
-    const exactCurrentXP = xpForCurrentLevel + currentXP;
+            // Total XP the user currently has
+            const exactCurrentXP = xpForCurrentLevel + currentXP;
 
-    // 1. Calculate the XP to reach the target level at 0% completion
-    let xpToTargetAtZero = xpForTargetLevel - exactCurrentXP;
+            // 1. Calculate the XP to reach the target level at 0% completion
+            let xpToTargetAtZero = xpForTargetLevel - exactCurrentXP;
 
-    // 2. Calculate the additional XP needed to reach the desired completion percentage
-    const xpForTargetCompletion = xpForTargetNextLevel - xpForTargetLevel;
-    const additionalXpForCompletion = xpForTargetCompletion * currentLevelPercentage;
+            // 2. Calculate the additional XP needed to reach the desired completion percentage
+            const xpForTargetCompletion = xpForTargetNextLevel - xpForTargetLevel;
+            const additionalXpForCompletion = xpForTargetCompletion * currentLevelPercentage;
 
-    // Total XP difference
-    const totalXpDifference = xpToTargetAtZero + additionalXpForCompletion;
+            // Total XP difference
+            const totalXpDifference = xpToTargetAtZero + additionalXpForCompletion;
 
-    // Round the total XP difference for output
-    const roundedTotalXpDifference = Math.round(totalXpDifference);
+            // Round the total XP difference for output
+            const roundedTotalXpDifference = Math.round(totalXpDifference);
 
-    // Output the result
-    const resultElement = document.getElementById('result');
-    let xpText = '';
+            // Output the result
+            const resultElement = document.getElementById('result');
+            let xpText = '';
 
-    // Create a yellow colored span for the percentage display
-    const percentageText = `<span style="color: #FFFF00;">${Math.round(currentLevelPercentage * 100)}%</span>`;
+            // Create a yellow colored span for the percentage display
+            const percentageText = `<span style="color: #FFFF00;">${Math.round(currentLevelPercentage * 100)}%</span>`;
 
-    if (roundedTotalXpDifference >= 0) {
-        xpText = `<span style="color: #2df705;">${roundedTotalXpDifference}</span>`;
-        resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
-    } else {
-        xpText = `<span style="color: #fa0223;">${Math.abs(roundedTotalXpDifference)}</span>`;
-        resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
-    }
-}
+            if (roundedTotalXpDifference >= 0) {
+                xpText = `<span style="color: #2df705;">${roundedTotalXpDifference}</span>`;
+                resultElement.innerHTML = `Tienes que añadir ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
+            } else {
+                xpText = `<span style="color: #fa0223;">${Math.abs(roundedTotalXpDifference)}</span>`;
+                resultElement.innerHTML = `Tienes que quitar ${xpText} de XP al usuario para alcanzar el nivel ${targetLevel} con ${percentageText} completado.`;
+            }
+        }
     </script>
 </body>
+
 </html>
